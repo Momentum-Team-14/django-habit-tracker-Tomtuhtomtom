@@ -7,4 +7,5 @@ urlpatterns = [
 
 urlpatterns += [
     path('habits/', views.list_habits, name='list-habits'),
+    path('habits/new', views.add_habit, name='add-habit'),
 ]
