@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('habit_tracker.urls')),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
