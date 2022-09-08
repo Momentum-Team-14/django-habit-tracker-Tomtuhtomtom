@@ -21,7 +21,9 @@ def add_habit(request):
     if request.method == "POST":
         form = HabitForm(data=request.POST)
         if form.is_valid():
-            habit = form.save()
+            habit = form.save(commit=False)
+            habit.user = request.user
+            habit.save()
 
             return redirect("list-habits")
     else:
