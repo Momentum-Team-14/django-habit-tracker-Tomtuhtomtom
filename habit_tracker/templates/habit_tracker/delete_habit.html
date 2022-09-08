@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <form action="{% url 'delete-habit' pk=habit.pk %}" method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete <span>{{ habit.title }}</span>?</p>
+        <div>
+            <button type="submi">Delete Habit</button>
+            <p><a href="{% url 'habit-detail' habit.pk%}">Cancel</a></p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

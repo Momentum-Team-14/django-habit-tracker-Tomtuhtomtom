@@ -5,7 +5,7 @@
 <h1>All Habits</h1>
 <ul>
 {% for habit in habits %}
-    <li>{{ habit.name }}</li>
+    <li><a href="{% url 'habit-detail' habit.pk %}">{{ habit.name }}</a></li>
 {% endfor %}
 </ul>
 <a href="{% url 'add-habit' %}">Add habit</a>

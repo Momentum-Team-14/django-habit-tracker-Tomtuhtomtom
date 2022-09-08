@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Edit Habit</h1>
+<div>
+    <form action="{% url 'edit_habit' pk=habit.pk %" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="{{form.name.id_for_label}}">{{  form.name.label }}</label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label for="{{form.target_number.id_for_label}}">{{  form.target_number.label }}</label>
+            {{ form.target_number }}
+        </div>
+        <div>
+            <label for="{{form.unit_of_measure.id_for_label}}">{{  form.unit_of_measure.label }}</label>
+            {{ form.unit_of_measure }}
+        </div>
+        <div>
+            <button type="submit">Save changes</button>
+            <p><a href="{% url 'habit-detail' habit.pk%}">Cancel</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}
