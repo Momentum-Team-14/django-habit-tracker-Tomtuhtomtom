@@ -12,7 +12,7 @@ def index(request):
 
 @login_required
 def list_habits(request):
-    habits = Habit.objects.all().order_by('name')
+    habits = Habit.objects.filter(user=request.user).order_by('name')
     return render(request, "habit_tracker/list_habits.html", {"habits": habits})
 
 
@@ -23,7 +23,7 @@ def add_habit(request):
         if form.is_valid():
             habit = form.save()
 
-            return redirect("habits-detail", pk=habit.pk)
+            return redirect("list-habits")
     else:
         form = HabitForm()
 
