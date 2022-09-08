@@ -21,9 +21,9 @@ class Habit(models.Model):
 
 
 class Record(models.Model):
-    habit = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='records')
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE, related_name='records')
     entry_date = models.DateField()
     result = models.IntegerField(help_text="Enter amount completed")
 
     def __str__(self):
-        return self.result
+        return str(self.result)

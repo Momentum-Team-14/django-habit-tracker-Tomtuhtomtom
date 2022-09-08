@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a href="{% url 'index' %}">Home</a></p>
+<h1>All Records</h1>
+<ul>
+{% for record in records %}
+    <li><a href="{% url 'record-detail' record.pk%}">{{ record }}</a></li>
+{% endfor %}
+</ul>
+<a href="">Add Record</a>
+{% endblock %}

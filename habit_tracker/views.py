@@ -71,3 +71,26 @@ def delete_habit(request, pk):
         return redirect('list-habits')
 
     return render(request, 'habit_tracker/delete_habit.html', {"habit": habit})
+
+
+@login_required
+def list_records(request):
+    # habits = request.GET.get("records")
+    records = Record.objects.all().order_by('entry_date')
+    # records = Record.objects.filter(
+    #     habit=habits).order_by('entry_date')
+    return render(request, "habit_tracker/list_records.html", {"records": records})
+
+
+@login_required
+def record_detail(request, pk):
+    record = get_object_or_404(Record, pk=pk)
+    return render(
+        request,
+        'habit_tracker/record_detail.html',
+        {
+            "record": record,
+            "entry_date": record.entry_date,
+            "result": record.result,
+        },
+    )

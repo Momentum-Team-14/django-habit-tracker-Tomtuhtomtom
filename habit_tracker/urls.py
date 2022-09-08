@@ -12,3 +12,8 @@ urlpatterns += [
     path('habits/<int:pk>/edit', views.edit_habit, name='edit-habit'),
     path('habits/<int:pk>/delete', views.delete_habit, name='delete-habit'),
 ]
+
+urlpatterns += [
+    path('records/', views.list_records, name='list-records'),
+    path('records/<int:pk>', views.record_detail, name='record-detail'),
+]
