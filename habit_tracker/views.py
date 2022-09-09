@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import CustomUser, Habit, Record
 from django.contrib.auth.decorators import login_required
 from .forms import HabitForm, RecordForm
+from django.db.models import Avg
 
 # Create your views here.
 def index(request):
@@ -13,7 +14,8 @@ def index(request):
 @login_required
 def list_habits(request):
     habits = Habit.objects.filter(user=request.user).order_by('name')
-    return render(request, "habit_tracker/list_habits.html", {"habits": habits})
+    avg_results = Record.objects.aggregate(Avg('result'))
+    return render(request, "habit_tracker/list_habits.html", {"habits": habits, "avg_results": avg_results})
 
 
 @login_required
