@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <form action="{% url 'delete-record' pk=record.pk %}" method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete <span>{{ record.title }}</span>?</p>
+        <div>
+            <button type="submi">Delete Record</button>
+            <p><a href="{% url 'record-detail' record.pk%}">Cancel</a></p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

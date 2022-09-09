@@ -4,9 +4,12 @@
 <h1>All Habits</h1>
 <ul>
 {% for habit in habits %}
-    <li><a href="{% url 'habit-detail' habit.pk %}">{{ habit.name }}</a></li>
+    <li><a href="{% url 'habit-detail' habit.pk %}">{{ habit.name }}</a>
+    <span>Goal: {{ habit.target_number }} {{ habit.unit_of_measure }} a day, </span><span>Average</span>
+    <p><a href="{% url 'add-record' %}">Enter a daily record</a></p>
+    </li>
 {% endfor %}
 </ul>
+<hr>
 <a href="{% url 'add-habit' %}">Add habit</a>
-<p><a href="">Enter a daily record</a></p>
 {% endblock %}

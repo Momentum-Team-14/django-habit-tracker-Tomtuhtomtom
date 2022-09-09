@@ -3,8 +3,10 @@
 {% block content %}
 <p><a href="{% url 'index' %}">Home</a></p>
 <p><a href="{% url 'list-habits' %}">Back to all habits</a></p>
+<hr>
 <h1>{{ habit.name }}</h1>
 <p>Target: {{ habit.target_number }} {{ habit.unit_of_measure }} a day.</p>
+<hr>
 <p><a href="{% url 'list-records' %}">See Records</a></p>
 <div>
     <a href="{% url 'edit-habit' habit.pk %}">Edit habit</a>

@@ -3,10 +3,13 @@
 {% block content %}
 <p><a href="{% url 'index' %}">Home</a></p>
 <p><a href="{% url 'list-records' %}">Back to all records</a></p>
+<hr>
 <h1>{{ record.entry_date }}</h1>
+<h2>{{ record.habit }}</h2>
 <p>Result: {{ record.result }} {{ record.habit.unit_of_measure }}</p>
+<hr>
 <div>
-    <a href="">Edit record</a>
-    <a href="">Delete record</a>
+    <a href="{% url 'edit-record' record.pk %}">Edit record</a>
+    <a href="{% url 'delete-record' record.pk %}">Delete record</a>
 </div>
 {% endblock %}

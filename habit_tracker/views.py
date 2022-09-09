@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import CustomUser, Habit, Record
 from django.contrib.auth.decorators import login_required
-from .forms import HabitForm
+from .forms import HabitForm, RecordForm
 
 # Create your views here.
 def index(request):
@@ -75,10 +75,7 @@ def delete_habit(request, pk):
 
 @login_required
 def list_records(request):
-    # habits = request.GET.get("records")
-    records = Record.objects.all().order_by('entry_date')
-    # records = Record.objects.filter(
-    #     habit=habits).order_by('entry_date')
+    records = Record.objects.filter(habit__user=request.user).order_by('entry_date')
     return render(request, "habit_tracker/list_records.html", {"records": records})
 
 
@@ -94,3 +91,44 @@ def record_detail(request, pk):
             "result": record.result,
         },
     )
+
+
+@login_required
+def add_record(request):
+    if request.method == "POST":
+        form = RecordForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect("list-records")
+    else:
+        form = RecordForm()
+
+    return render(request, "habit_tracker/add_record.html", {"form": form})
+
+
+@login_required
+def edit_record(request, pk):
+    record = get_object_or_404(Record, pk=pk)
+    if request.method == "GET":
+        form = RecordForm(instance=record)
+    else:
+        form = RecordForm(data=request.POST, instance=record)
+        if form.is_valid():
+            form.save()
+            return redirect("list-records")
+        else:
+            print(form.errors)
+
+    return render(request, "habit_tracker/edit_record.html", {"form": form, "record": record})
+
+
+@login_required
+def delete_record(request, pk):
+    record = get_object_or_404(Record, pk=pk)
+
+    if request.method == "POST":
+        record.delete()
+        return redirect('list-records')
+
+    return render(request, 'habit_tracker/delete_record.html', {"record": record})

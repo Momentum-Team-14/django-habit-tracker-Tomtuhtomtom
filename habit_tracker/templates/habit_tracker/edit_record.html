@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Edit Record</h1>
+<div>
+    <form action="{% url 'edit_record' pk=record.pk %" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="{{form.habit.id_for_label}}">{{  form.habit.label }}</label>
+            {{ form.habit }}
+        </div>
+        <div>
+            <label for="{{form.entry_date.id_for_label}}">{{  form.entry_date.label }}</label>
+            {{ form.entry_date }}
+        </div>
+        <div>
+            <label for="{{form.result.id_for_label}}">{{  form.result.label }}</label>
+            {{ form.result }}
+        </div>
+        <div>
+            <button type="submit">Save changes</button>
+            <p><a href="{% url 'record-detail' record.pk%}">Cancel</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}

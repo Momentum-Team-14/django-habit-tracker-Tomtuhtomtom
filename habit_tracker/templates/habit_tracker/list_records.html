@@ -2,11 +2,13 @@
 {% load static %}
 {% block content %}
 <p><a href="{% url 'index' %}">Home</a></p>
+<hr>
 <h1>All Records</h1>
 <ul>
 {% for record in records %}
-    <li><a href="{% url 'record-detail' record.pk%}">{{ record }}{{ record.habit.unit_of_measure }}</a></li>
+    <li><a href="{% url 'record-detail' record.pk%}">{{ record.entry_date }} </a>({{record.habit}})</li>
 {% endfor %}
 </ul>
-<a href="">Add Record</a>
+<hr>
+<a href="{% url 'add-record' %}">Add Record</a>
 {% endblock %}
