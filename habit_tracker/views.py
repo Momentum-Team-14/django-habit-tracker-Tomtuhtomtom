@@ -17,6 +17,22 @@ def list_habits(request):
 
 
 @login_required
+def habit_detail(request, pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    records = Record.objects.filter(habit=pk).order_by('entry_date')
+    return render(
+        request,
+        'habit_tracker/habit_detail.html',
+        {
+            "habit": habit,
+            "target_number": habit.target_number,
+            "unit_of_measure": habit.unit_of_measure,
+            "records": records,
+        },
+    )
+
+
+@login_required
 def add_habit(request):
     if request.method == "POST":
         form = HabitForm(data=request.POST)
@@ -30,20 +46,6 @@ def add_habit(request):
         form = HabitForm()
 
     return render(request, "habit_tracker/add_habit.html", {"form": form})
-
-
-@login_required
-def habit_detail(request, pk):
-    habit = get_object_or_404(Habit, pk=pk)
-    return render(
-        request,
-        'habit_tracker/habit_detail.html',
-        {
-            "habit": habit,
-            "target_number": habit.target_number,
-            "unit_of_measure": habit.unit_of_measure,
-        },
-    )
 
 
 @login_required
