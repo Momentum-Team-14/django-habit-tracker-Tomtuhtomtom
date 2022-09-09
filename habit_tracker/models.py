@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.constraints import UniqueConstraint
 
 
 class CustomUser(AbstractUser):
@@ -24,6 +25,11 @@ class Record(models.Model):
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE, related_name='records')
     entry_date = models.DateField()
     result = models.IntegerField(help_text="Enter amount completed")
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=["habit", "entry_date"], name="unique_user_date")
+        ]
 
     def __str__(self):
         return str(self.result)

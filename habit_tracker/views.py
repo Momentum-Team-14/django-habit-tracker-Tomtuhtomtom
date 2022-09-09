@@ -106,7 +106,7 @@ def add_record(request, pk):
             record.habit = habit
             record.save()
             
-            return redirect("list-records", pk=habit.pk)
+            return redirect("list-habits")
     else:
         form = RecordForm()
 
