@@ -6,13 +6,13 @@
 <hr>
 <h1>{{ habit.name }}</h1>
 <p>Target: {{ habit.target_number }} {{ habit.unit_of_measure }} a day.</p>
+<p>History:</p>
 <ul>
     {% for record in records %}
         <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a></li>
     {% endfor %}
 </ul>
 
-<p>Put history here?</p>
 <hr>
 <p><a href="{% url 'list-records' %}">See Records</a></p>
 <div>

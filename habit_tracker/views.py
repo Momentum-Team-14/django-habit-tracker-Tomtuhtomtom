@@ -96,13 +96,17 @@ def record_detail(request, pk):
 
 
 @login_required
-def add_record(request):
+def add_record(request, pk):
+    habit = get_object_or_404(Habit, pk=pk)
     if request.method == "POST":
         form = RecordForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            record = form.save(commit=False)
+            record.user = request.user
+            record.habit = habit
+            record.save()
             
-            return redirect("list-records")
+            return redirect("list-records", pk=habit.pk)
     else:
         form = RecordForm()
 

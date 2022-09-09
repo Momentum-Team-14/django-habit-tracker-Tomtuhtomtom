@@ -9,6 +9,12 @@ class HabitForm(forms.ModelForm):
 
 
 class RecordForm(forms.ModelForm):
+    entry_date = forms.DateField(
+        widget=forms.SelectDateWidget(
+            empty_label=('Choose Year', 'Choose Month', 'Choose Day')
+            )
+            )
+
     class Meta:
         model = Record
-        fields = ("habit", "entry_date", "result")
+        fields = ("entry_date", "result")
