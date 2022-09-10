@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.constraints import UniqueConstraint
+from django.db.models import Avg
 
 
 class CustomUser(AbstractUser):
@@ -32,7 +33,7 @@ class Record(models.Model):
         ]
 
     def percentage(self):
-        return (self.result / self.habit.target_number) * 100
+        return int((self.result / self.habit.target_number) * 100)
 
     def __str__(self):
         return str(self.result)

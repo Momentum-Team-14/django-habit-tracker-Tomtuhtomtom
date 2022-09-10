@@ -6,17 +6,23 @@
 <hr>
 <h1>{{ habit.name }}</h1>
 <p>Target: {{ habit.target_number }} {{ habit.unit_of_measure }} a day.</p>
+<p>Average per day: {{ average.result__avg|floatformat:2 }}</p>
+{% if average.result__avg > habit.target_number %}
+<p><strong>Good job! Consider increasing your goal target!</strong></p>
+{% else %}
+<p><strong>Keep working! You can do this!</strong></p>
+{% endif %}
 <p><strong>History:</strong></p>
 {% if records %}
 <ul>
     {% for record in records %}
         {% if record.result >= habit.target_number %}
         <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a>
-        <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }} - Goal Met!</strong></span>
+        <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }}% - Goal Met!</strong></span>
         </li>
         {% else %}
         <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a>
-            <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }} - Goal Not Met!</strong></span>
+            <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }}% - Goal Not Met!</strong></span>
         </li>
         {% endif %}
     {% endfor %}

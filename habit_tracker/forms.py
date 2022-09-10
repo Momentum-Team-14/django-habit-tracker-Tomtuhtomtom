@@ -1,5 +1,6 @@
 from .models import Habit, Record
 from django import forms
+from django.utils import timezone
 
 
 class HabitForm(forms.ModelForm):
@@ -12,7 +13,7 @@ class RecordForm(forms.ModelForm):
     entry_date = forms.DateField(
         widget=forms.SelectDateWidget(
             empty_label=('Choose Year', 'Choose Month', 'Choose Day')
-            )
+            ), initial=timezone.now(),
             )
 
     class Meta:

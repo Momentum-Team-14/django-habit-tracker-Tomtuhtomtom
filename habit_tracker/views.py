@@ -14,14 +14,14 @@ def index(request):
 @login_required
 def list_habits(request):
     habits = Habit.objects.filter(user=request.user).order_by('name')
-    avg_results = Record.objects.aggregate(Avg('result'))
-    return render(request, "habit_tracker/list_habits.html", {"habits": habits, "avg_results": avg_results})
+    return render(request, "habit_tracker/list_habits.html", {"habits": habits})
 
 
 @login_required
 def habit_detail(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = Record.objects.filter(habit=pk).order_by('-entry_date')
+    average = Record.objects.filter(habit=pk).aggregate(Avg('result'))
     return render(
         request,
         'habit_tracker/habit_detail.html',
@@ -30,6 +30,7 @@ def habit_detail(request, pk):
             "target_number": habit.target_number,
             "unit_of_measure": habit.unit_of_measure,
             "records": records,
+            "average": average,
         },
     )
 
