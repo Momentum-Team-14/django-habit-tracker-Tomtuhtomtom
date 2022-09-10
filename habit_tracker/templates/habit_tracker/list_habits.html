@@ -2,15 +2,15 @@
 {% load static %}
 {% block content %}
 <h1>All Habits</h1>
-<ul>
+<table>
 {% for habit in habits %}
-    <li><a href="{% url 'habit-detail' habit.pk %}">{{ habit.name }}</a>
-    <strong>&emsp;Goal: {{ habit.target_number }} {{ habit.unit_of_measure }} a day&emsp;</strong>
-    <a href="{% url 'add-record' habit.pk %}">Enter a daily record</a>
-    </li>
-    <br>
+    <tr>
+        <td><a href="{% url 'habit-detail' habit.pk %}">{{ habit.name }}</a></td>
+        <td><strong>&emsp;Goal: {{ habit.target_number }} {{ habit.unit_of_measure }} a day</strong></td>
+        <td><a href="{% url 'add-record' habit.pk %}">Enter a daily record</a></td>
+    </tr>
 {% endfor %}
-</ul>
+</table>
 <hr>
 <a href="{% url 'add-habit' %}">Add habit</a>
 <p><a href="{% url 'list-records' %}">See All Records</a></p>

@@ -14,22 +14,36 @@
 {% endif %}
 <p><strong>History:</strong></p>
 {% if records %}
-<ul>
+<table>
+    <tr>
+        <td>Date</td>
+        <td>Result</td>
+        <td>Unit of Measure</td>
+        <td>Completion %</td>
+        <td>Goal Met?</td>
+    </tr>
     {% for record in records %}
+    <tr>
         {% if record.result >= habit.target_number %}
-        <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a>
-        <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }}% - Goal Met!</strong></span>
-        </li>
+        <td><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a></td>
+        <td align="right">{{ record }}</td>
+        <td>{{ habit.unit_of_measure }}</td>
+        <td><strong>{{ record.percentage }}%</strong></td>
+        <td><strong>Goal Met!</strong></td>
         {% else %}
-        <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a>
-            <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }}% - Goal Not Met!</strong></span>
-        </li>
+        <td><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a></td>
+        <td align="right">{{ record }}</td>
+        <td>{{ habit.unit_of_measure }}</td>
+        <td><strong>{{ record.percentage }}%</strong></td>
+        <td><strong>Goal Not Met!</strong></td>
         {% endif %}
+    </tr>
     {% endfor %}
-</ul>
+</table>
 {% else %}
 <p>No Records Found</p>
 {% endif %}
+
 
 <hr>
 <div>
