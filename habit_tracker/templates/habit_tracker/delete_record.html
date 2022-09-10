@@ -6,7 +6,7 @@
         {% csrf_token %}
         <p>Are you sure you want to delete <span>{{ record.title }}</span>?</p>
         <div>
-            <button type="submi">Delete Record</button>
+            <button type="submit">Delete Record</button>
             <p><a href="{% url 'record-detail' record.pk%}">Cancel</a></p>
         </div>
     </form>

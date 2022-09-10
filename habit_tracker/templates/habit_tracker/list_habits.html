@@ -5,11 +5,12 @@
 <ul>
 {% for habit in habits %}
     <li><a href="{% url 'habit-detail' habit.pk %}">{{ habit.name }}</a>
-    <span>&nbsp;&nbsp;Goal: {{ habit.target_number }} {{ habit.unit_of_measure }} a day, </span>
+    <strong>&nbsp;&nbsp;Goal: {{ habit.target_number }} {{ habit.unit_of_measure }} a day, </strong>
     <p>Show Average Here&nbsp;&nbsp;<span><a href="{% url 'add-record' habit.pk %}">Enter a daily record</a></span></p>
     </li>
 {% endfor %}
 </ul>
 <hr>
 <a href="{% url 'add-habit' %}">Add habit</a>
+<p><a href="{% url 'list-records' %}">See All Records</a></p>
 {% endblock %}

@@ -6,7 +6,14 @@
 <hr>
 <h1>{{ record.entry_date }}</h1>
 <h2>{{ record.habit }}</h2>
+<p>Target: {{ record.habit.target_number }} {{ record.habit.unit_of_measure }}</p>
 <p>Result: {{ record.result }} {{ record.habit.unit_of_measure }}</p>
+{% if record.result >= record.habit.target_number %}
+<h2>Goal Met!</h2>
+{% else %}
+<h2>Goal Not Met!</h2>
+{% endif %}
+
 <hr>
 <div>
     <a href="{% url 'edit-record' record.pk %}">Edit record</a>

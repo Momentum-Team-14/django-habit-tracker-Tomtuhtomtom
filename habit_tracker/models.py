@@ -31,5 +31,8 @@ class Record(models.Model):
             UniqueConstraint(fields=["habit", "entry_date"], name="unique_user_date")
         ]
 
+    def percentage(self):
+        return (self.result / self.habit.target_number) * 100
+
     def __str__(self):
         return str(self.result)

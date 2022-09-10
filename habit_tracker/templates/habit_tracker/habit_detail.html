@@ -6,15 +6,26 @@
 <hr>
 <h1>{{ habit.name }}</h1>
 <p>Target: {{ habit.target_number }} {{ habit.unit_of_measure }} a day.</p>
-<p>History:</p>
+<p><strong>History:</strong></p>
+{% if records %}
 <ul>
     {% for record in records %}
-        <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a></li>
+        {% if record.result >= habit.target_number %}
+        <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a>
+        <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }} - Goal Met!</strong></span>
+        </li>
+        {% else %}
+        <li><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a>
+            <span>- {{ record }} {{ habit.unit_of_measure }} <strong>{{ record.percentage }} - Goal Not Met!</strong></span>
+        </li>
+        {% endif %}
     {% endfor %}
 </ul>
+{% else %}
+<p>No Records Found</p>
+{% endif %}
 
 <hr>
-<p><a href="{% url 'list-records' %}">See Records</a></p>
 <div>
     <a href="{% url 'edit-habit' habit.pk %}">Edit habit</a>
     <a href="{% url 'delete-habit' habit.pk %}">Delete habit</a>

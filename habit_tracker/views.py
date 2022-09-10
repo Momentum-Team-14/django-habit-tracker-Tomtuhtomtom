@@ -21,7 +21,7 @@ def list_habits(request):
 @login_required
 def habit_detail(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
-    records = Record.objects.filter(habit=pk).order_by('entry_date')
+    records = Record.objects.filter(habit=pk).order_by('-entry_date')
     return render(
         request,
         'habit_tracker/habit_detail.html',
