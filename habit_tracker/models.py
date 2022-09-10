@@ -29,7 +29,7 @@ class Record(models.Model):
 
     class Meta:
         constraints = [
-            UniqueConstraint(fields=["habit", "entry_date"], name="unique_user_date")
+            UniqueConstraint(fields=["habit", "entry_date"], name="unique_habit_date")
         ]
 
     def percentage(self):

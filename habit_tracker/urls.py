@@ -21,6 +21,7 @@ urlpatterns += [
     path('records/<int:pk>/delete', views.delete_record, name='delete-record'),
 ]
 
-# urlpatterns += [
-#     path('habits/<int:pk>/<int:year>/<int:month>/<int:day>', views.record_detail, name='record-detail'),
-# ]
+# using this for trying to get the year,month,day in the url
+urlpatterns += [
+    path('habits/<int:pk>/<int:year>/<int:month>/<int:day>', views.test_detail, name='test-detail'),
+]
