@@ -20,3 +20,7 @@ urlpatterns += [
     path('records/<int:pk>/edit', views.edit_record, name='edit-record'),
     path('records/<int:pk>/delete', views.delete_record, name='delete-record'),
 ]
+
+# urlpatterns += [
+#     path('habits/<int:pk>/<int:year>/<int:month>/<int:day>', views.record_detail, name='record-detail'),
+# ]

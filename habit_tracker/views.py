@@ -3,6 +3,7 @@ from .models import CustomUser, Habit, Record
 from django.contrib.auth.decorators import login_required
 from .forms import HabitForm, RecordForm
 from django.db.models import Avg
+import datetime
 
 # Create your views here.
 def index(request):
@@ -96,6 +97,32 @@ def record_detail(request, pk):
             "result": record.result,
         },
     )
+
+
+# @login_required
+# def record_detail(request, pk, year=None, month=None, day=None):
+#     record = get_object_or_404(Record, pk=pk)
+#     if year is None:
+#         date_for_record = datetime.date.today()
+#     else:
+#         date_for_record = datetime.date(year, month, day)
+#     next_day = date_for_record + datetime.timedelta(days=1)
+#     prev_day = date_for_record + datetime.timedelta(day=-1)
+
+#     record_entry, _ = request.user.record_entries.get_or_create(date=date_for_record)
+
+#     return render(
+#         request,
+#         'habit_tracker/record_detail.html',
+#         {
+#             "record": record,
+#             "entry_date": record.entry_date,
+#             "result": record.result,
+#             "date_for_record": date_for_record,
+#             "next_day": next_day,
+#             "prev_day": prev_day,
+#         },
+#     )
 
 
 @login_required

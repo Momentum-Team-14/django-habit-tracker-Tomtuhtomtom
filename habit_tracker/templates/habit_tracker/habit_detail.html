@@ -6,6 +6,7 @@
 <hr>
 <h1>{{ habit.name }}</h1>
 <p>Target: {{ habit.target_number }} {{ habit.unit_of_measure }} a day.</p>
+{% if records %}
 <p>Average per day: {{ average.result__avg|floatformat:2 }}</p>
 {% if average.result__avg > habit.target_number %}
 <p><strong>Good job! Consider increasing your goal target!</strong></p>
@@ -13,7 +14,6 @@
 <p><strong>Keep working! You can do this!</strong></p>
 {% endif %}
 <p><strong>History:</strong></p>
-{% if records %}
 <table>
     <tr>
         <td>Date</td>
