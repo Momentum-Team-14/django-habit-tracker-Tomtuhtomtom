@@ -23,6 +23,6 @@ urlpatterns += [
 
 # using this for trying to get the year,month,day in the url
 urlpatterns += [
-    path('habits/<int:pk>/<int:year>/<int:month>/<int:day>', views.test_detail, name='test-detail'),
+    path('habits/<int:pk>/<year>/<month>/<day>', views.test_detail, name='test-detail'),
     # path('habits/<int:pk>/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/$', views.test_detail, name='test-detail'),
 ]

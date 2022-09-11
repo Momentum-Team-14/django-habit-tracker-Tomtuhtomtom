@@ -101,30 +101,22 @@ def record_detail(request, pk):
 # testing to try to get get_or_create to work
 @login_required
 def test_detail(request, pk, year=None, month=None, day=None):
-    if year is None:
-        date_for_record = datetime.date.today()
-    else:
-        date_for_record = datetime.date(year, month, day)
-    next_day = date_for_record + datetime.timedelta(days=1)
-    prev_day = date_for_record + datetime.timedelta(day=-1)
-
-    record_page, _ = request.user.record_pages.get_or_create(date=date_for_record)
-    record = get_object_or_404(Record)
-    habit = get_object_or_404(Habit, pk=pk)
+    record = get_object_or_404(Record, pk=pk)
+    record_dates = Record.objects.filter(entry_date=record.entry_date, habit__user=request.user).order_by('-entry_date')
+    year = record.entry_date.year
+    month = record.entry_date.month
+    day = record.entry_date.day
 
     return render(
         request,
         'habit_tracker/test_detail.html',
         {
-            "record_page": record_page,
             "record": record,
-            "habit": habit,
-            "entry_date": record.entry_date,
-            "result": record.result,
-            "date_for_record": date_for_record,
-            "next_day": next_day,
-            "prev_day": prev_day,
-        },
+            "year": year,
+            "month": month,
+            "day": day,
+            "record_dates": record_dates,
+        }
     )
 
 
