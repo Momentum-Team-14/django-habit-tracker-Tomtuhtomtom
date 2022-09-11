@@ -109,7 +109,8 @@ def test_detail(request, pk, year=None, month=None, day=None):
     prev_day = date_for_record + datetime.timedelta(day=-1)
 
     record_page, _ = request.user.record_pages.get_or_create(date=date_for_record)
-    record = record = get_object_or_404(Record, pk=pk)
+    record = get_object_or_404(Record)
+    habit = get_object_or_404(Habit, pk=pk)
 
     return render(
         request,
@@ -117,9 +118,10 @@ def test_detail(request, pk, year=None, month=None, day=None):
         {
             "record_page": record_page,
             "record": record,
+            "habit": habit,
             "entry_date": record.entry_date,
             "result": record.result,
-            "date": date_for_record,
+            "date_for_record": date_for_record,
             "next_day": next_day,
             "prev_day": prev_day,
         },
