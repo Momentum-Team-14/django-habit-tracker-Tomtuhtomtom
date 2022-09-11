@@ -5,7 +5,7 @@ from .forms import HabitForm, RecordForm
 from django.db.models import Avg
 import datetime
 
-# Create your views here.
+
 def index(request):
     if request.user.is_authenticated:
         return redirect("list-habits")
@@ -101,23 +101,46 @@ def record_detail(request, pk):
 # testing to try to get get_or_create to work
 @login_required
 def test_detail(request, pk, year=None, month=None, day=None):
-    record = get_object_or_404(Record, pk=pk)
-    record_dates = Record.objects.filter(entry_date=record.entry_date, habit__user=request.user).order_by('-entry_date')
-    year = record.entry_date.year
-    month = record.entry_date.month
-    day = record.entry_date.day
+    habit = get_object_or_404(Habit, pk=pk)
+    if year is None:
+        date_for_record = datetime.date.today()
+    # year = record.entry_date.year
+    # month = record.entry_date.month
+    # day = record.entry_date.day
 
-    return render(
-        request,
-        'habit_tracker/test_detail.html',
-        {
-            "record": record,
-            "year": year,
-            "month": month,
-            "day": day,
-            "record_dates": record_dates,
-        }
-    )
+    return render(request, 'habit_tracker/test_detail.html', {"year": year, "month": month, "day": day})
+    # record = get_object_or_404(Record, pk=pk)
+    # record_dates = Record.objects.filter(entry_date=record.entry_date, habit__user=request.user).order_by('-entry_date')
+    # year = record.entry_date.year
+    # month = record.entry_date.month
+    # day = record.entry_date.day
+
+    # if year is None:
+    #     date_for_record = datetime.date.today()
+    # else:
+    #     date_for_record = datetime.date(year, month, day)
+    # next_day = date_for_record + datetime.timedelta(days=1)
+    # prev_day = date_for_record + datetime.timedelta(days=-1)
+
+    # record = get_object_or_404(Record, pk=pk)
+    # habit = get_object_or_404(Habit, pk=pk)
+    # habit_record, _ = Record.objects.get_or_create(habit=habit, entry_date=datetime.date.today(), result=0)
+
+    # return render(
+    #     request,
+    #     'habit_tracker/test_detail.html',
+    #     {
+    #         "record": record,
+    #         "year": year,
+    #         "month": month,
+    #         "day": day,
+    #         "habit": habit,
+    #         "habit_record": habit_record,
+    #         "next_day": next_day,
+    #         "prev_day": prev_day,
+    #         "date_for_record": date_for_record,
+    #     }
+    # )
 
 
 @login_required

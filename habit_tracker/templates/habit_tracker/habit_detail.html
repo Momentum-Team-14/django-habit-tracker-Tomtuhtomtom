@@ -51,6 +51,6 @@
     <a href="{% url 'delete-habit' habit.pk %}">Delete habit</a>
     <hr>
     <p>Trying to get this test link to open date as url</p>
-    <p><a href="">Test</a></p>
+    <p><a href="{% url 'test-detail' pk=habit.pk year=year month=month day=day %}">Test</a></p>
 </div>
 {% endblock %}
