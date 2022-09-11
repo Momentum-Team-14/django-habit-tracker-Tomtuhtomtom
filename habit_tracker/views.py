@@ -102,13 +102,16 @@ def record_detail(request, pk):
 @login_required
 def test_detail(request, pk, year=None, month=None, day=None):
     habit = get_object_or_404(Habit, pk=pk)
+    record = Record.objects.all()
     if year is None:
         date_for_record = datetime.date.today()
-    # year = record.entry_date.year
+    else:
+        date_for_record = datetime.date(year, month, day)
+    # year = record.entry_date
     # month = record.entry_date.month
     # day = record.entry_date.day
 
-    return render(request, 'habit_tracker/test_detail.html', {"year": year, "month": month, "day": day})
+    return render(request, 'habit_tracker/test_detail.html', {"habit": habit, "record": record, "date_for_record": date_for_record, "year": year, "month": month, "day": day})
     # record = get_object_or_404(Record, pk=pk)
     # record_dates = Record.objects.filter(entry_date=record.entry_date, habit__user=request.user).order_by('-entry_date')
     # year = record.entry_date.year
