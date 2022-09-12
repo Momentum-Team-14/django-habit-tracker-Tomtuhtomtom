@@ -9,6 +9,13 @@ th, td{
     border-bottom: 1px solid black;
 }
 
+header{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: goldenrod;
+}
+
 a{
     text-decoration: none;
     font-weight: bold;

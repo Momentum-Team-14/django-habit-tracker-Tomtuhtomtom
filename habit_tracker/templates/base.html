@@ -10,6 +10,7 @@
 </head>
 <body>
     {% if user.is_authenticated %}
+            <header>Build-a-Habit!</header>
                 <div>Hello, {{user.username}}</div>
                 <div><a href="/accounts/logout/">Logout</a></div>
                 {% else %}
