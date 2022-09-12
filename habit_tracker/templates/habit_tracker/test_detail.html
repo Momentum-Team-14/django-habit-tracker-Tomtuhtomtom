@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p>Hello!</p>
+<p><a href="{% url 'index' %}">Home</a></p>
+<p><a href="{% url 'list-records' %}">See all records</a></p>
+<hr>
+<h1>{{ record.entry_date }}</h1>
+<h2>{{ record.habit }}</h2>
+<p>Target: {{ record.habit.target_number }} {{ record.habit.unit_of_measure }}</p>
+<p>Result: {{ record.result }} {{ record.habit.unit_of_measure }}</p>
+{% if record.result >= record.habit.target_number %}
+<h2>Goal Met!</h2>
+{% else %}
+<h2>Goal Not Met!</h2>
+{% endif %}
+
+<hr>
+<div>
+    <a href="">Edit record</a>
+    <a href="">Delete record</a>
+</div>
 {% endblock %}

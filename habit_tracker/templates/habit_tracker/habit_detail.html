@@ -16,6 +16,7 @@
 <p><strong>History:</strong></p>
 <table>
     <tr>
+        <th>Test</th>
         <th>Date</th>
         <th>Result</th>
         <th>Unit of Measure</th>
@@ -25,12 +26,14 @@
     {% for record in records %}
     <tr>
         {% if record.result >= habit.target_number %}
+        <td><a href="{% url 'test-detail' pk=habit.pk year=record.entry_date.year month=record.entry_date.month day=record.entry_date.day %}">Test</a></td>
         <td><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a></td>
         <td align="right">{{ record }}</td>
         <td>{{ habit.unit_of_measure }}</td>
         <td><strong>{{ record.percentage }}%</strong></td>
         <td><strong>Goal Met!</strong></td>
         {% else %}
+        <td><a href="{% url 'test-detail' pk=habit.pk year=record.entry_date.year month=record.entry_date.month day=record.entry_date.day %}">Test</a></td>
         <td><a href="{% url 'record-detail' record.pk %}">{{ record.entry_date }}</a></td>
         <td align="right">{{ record }}</td>
         <td>{{ habit.unit_of_measure }}</td>
@@ -49,8 +52,5 @@
 <div>
     <a href="{% url 'edit-habit' habit.pk %}">Edit habit</a>
     <a href="{% url 'delete-habit' habit.pk %}">Delete habit</a>
-    <hr>
-    <p>Trying to get this test link to open date as url</p>
-    <p><a href="">Test</a></p>
 </div>
 {% endblock %}
